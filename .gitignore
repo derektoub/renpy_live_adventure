@@ -1,3 +1,4 @@
 game/saves
 *.pyc
+*.rpyc
 .DS_Store
