@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 33: end of line expected.
-    show usagi at rightish behind unspeakable horror
-                                              ^
+File "game/script.rpy", line 60: reached end of line when expecting ':'.
+    if boss_health > 0
+                      ^
 
 Ren'Py Version: Ren'Py 7.3.5.606
-Mon Sep 21 23:08:03 2020
+Tue Sep 22 08:48:48 2020
