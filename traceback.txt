@@ -1,0 +1,50 @@
+﻿I'm sorry, but an uncaught exception occurred.
+
+While running game code:
+  File "game/script.rpy", line 37, in script
+    uh "You know what's coming right?"
+  File "renpy/common/000window.rpy", line 98, in _window_auto_callback
+    _window_show()
+  File "renpy/common/000window.rpy", line 60, in _window_show
+    renpy.with_statement(trans)
+IOError: Couldn't find file 'khrushchev trap.mp3'.
+
+-- Full Traceback ------------------------------------------------------------
+
+Full traceback:
+  File "game/script.rpy", line 37, in script
+    uh "You know what's coming right?"
+  File "/Users/arajo/renpy_games/renpy/ast.py", line 671, in execute
+    statement_name("say")
+  File "/Users/arajo/renpy_games/renpy/ast.py", line 45, in statement_name
+    i(name)
+  File "renpy/common/000window.rpy", line 98, in _window_auto_callback
+    _window_show()
+  File "renpy/common/000window.rpy", line 60, in _window_show
+    renpy.with_statement(trans)
+  File "/Users/arajo/renpy_games/renpy/exports.py", line 1601, in with_statement
+    return renpy.game.interface.do_with(trans, paired, clear=clear)
+  File "/Users/arajo/renpy_games/renpy/display/core.py", line 2251, in do_with
+    clear=clear)
+  File "/Users/arajo/renpy_games/renpy/display/core.py", line 2702, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, **kwargs)
+  File "/Users/arajo/renpy_games/renpy/display/core.py", line 3380, in interact_core
+    renpy.audio.audio.periodic()
+  File "/Users/arajo/renpy_games/renpy/audio/audio.py", line 1060, in periodic
+    six.reraise(exc[0], exc[1], exc[2])
+  File "/Users/arajo/renpy_games/renpy/audio/audio.py", line 1038, in periodic_thread_main
+    periodic_pass()
+  File "/Users/arajo/renpy_games/renpy/audio/audio.py", line 979, in periodic_pass
+    c.periodic()
+  File "/Users/arajo/renpy_games/renpy/audio/audio.py", line 457, in periodic
+    topf = load(self.file_prefix + filename + self.file_suffix)
+  File "/Users/arajo/renpy_games/renpy/audio/audio.py", line 73, in load
+    rv = renpy.loader.load(fn)
+  File "/Users/arajo/renpy_games/renpy/loader.py", line 576, in load
+    raise IOError("Couldn't find file '%s'." % name)
+IOError: Couldn't find file 'khrushchev trap.mp3'.
+
+Darwin-18.7.0-x86_64-i386-64bit
+Ren'Py 7.3.5.606
+derek 1.0
+Mon Sep 21 23:15:29 2020
