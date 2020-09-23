@@ -22,6 +22,20 @@ label start:
     # add a file (named either "bg room.png" or "bg room.jpg") to the
     # images directory to show it.
 
+    python:
+        characters = [
+            'Unspeakable Horror',
+            'Sesshomaru',
+            'Usagi',
+            'Charles',
+            'Cheolsu',
+            'David',
+            'Jimmy',
+            'Yeonghui',
+            'Drew'
+        ]
+        love_meter = {name: 0 for name in characters}
+
     scene bg beach
 
     # This shows a character sprite. A placeholder is used, but you can
@@ -79,6 +93,7 @@ label start:
             "Throw water":
                 $ boss_health -= 99
                 $ boss_health = max(boss_health, 0)
+                play sound "audio/water splash.mp3"
                 uh "That felt good baby!"
 
             "Ultimate attack":
@@ -96,10 +111,62 @@ label start:
         uh "I lost this time.."
         hide unspeakable_horror
         with moveouttop
+        $ lover = 'Unspeakable Horror'
+        $ love_meter[lover] += 1
+        "Congrats, Unspeakable Horror's love meter increased to [love_meter[Unspeakable Horror]]!"
     elif player_health == 0:
         uh "I was hoping for better"
 
     uh "Let's do it again tomorrow?"
+
+    label concert:
+        scene bg concert with Dissolve(1)
+
+        play music "audio/alcohaulin ass.mp3"
+
+        show sesshomaru at right with moveintop:
+            yalign .5 subpixel True
+
+            # parallel:
+            #     xalign .5
+            #     linear 3.0 xalign .75
+            #     linear 6.0 xalign .25
+            #     linear 3.0 xalign .5
+            #     repeat
+
+            # parallel:
+            #     alpha 1.0 zoom 1.0
+            #     linear .75 zoom .9
+            #     linear .75 zoom 1.0
+            #     repeat
+
+            parallel:
+                rotate 0
+                linear 2 rotate 360
+                repeat
+
+        show charles at left with moveinleft:
+            yalign .5 subpixel True
+
+            parallel:
+                xalign .5
+                linear 3.0 xalign .75
+                linear 6.0 xalign .25
+                linear 3.0 xalign .5
+                repeat
+
+            parallel:
+                alpha 1.0 zoom 1.0
+                linear .75 zoom .9
+                linear .75 zoom 1.0
+                repeat
+
+            parallel:
+                rotate 0
+                linear 0.25 rotate 360
+                repeat
+
+        "you ready to play?"
 
     return
 
@@ -108,6 +175,8 @@ label start:
         if current_song != "dubstep":
             play music "audio/brutaldubstep.mp3"
             $ current_song = "dubstep"
+        else:
+            play music "audio/sleepytime gorilla museum.mp3"
 
         show bg ominoustrees with Dissolve(1)
 
