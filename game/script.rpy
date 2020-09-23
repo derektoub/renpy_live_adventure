@@ -3,9 +3,9 @@
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
-define ch = Character("Charles")
+define ch = Character("Eric")
 define cu = Character("Cheolsu")
-define da = Character("David")
+define da = Character("Pichael")
 define dr = Character("Drew")
 define j = Character("Jimmy")
 define uh = Character("Unspeakable Horror")
@@ -36,7 +36,11 @@ label start:
         ]
         love_meter = {name: 0 for name in characters}
 
+    jump concert
+
     scene bg beach
+
+    # jump concert
 
     # This shows a character sprite. A placeholder is used, but you can
     # replace it by adding a file named "eileen happy.png" to the images
@@ -72,11 +76,13 @@ label start:
     uh "The time has finally come..."
     $ boss_health = 100
     $ player_health = 100
-    $ current_song = "cute"
+    $ num_attacks = 0
 
     while boss_health > 0 and player_health > 0:
 
-        call boss_attack(boss_taunt="ULTIMATE ATTACK")
+        call boss_attack(num_attacks=num_attacks)
+
+        $ num_attacks += 1
 
         show bg beach with Dissolve(1)
 
@@ -88,7 +94,7 @@ label start:
                 $ boss_health -= 10
                 $ boss_health = max(boss_health, 0)
                 play sound "audio/hell yeah.mp3"
-                uh "You've made a terrible mistake"
+                uh "oh damn"
 
             "Throw water":
                 $ boss_health -= 99
@@ -101,14 +107,14 @@ label start:
                 $ boss_health = max(boss_health, 0)
                 play music "audio/filthyfrank sad piano.mp3"
                 play sound "audio/crying.mp3"
-                $ current_song = "sad"
                 uh "What did you just do to me??"
-
-        uh "Heh, I still have [boss_health]/100 health"
+        if boss_health > 0:
+            uh "Heh, I still have [boss_health]/100 health"
+        else:
+            uh "Woo, you got me this time!"
 
     if boss_health == 0:
         uh "I think I'm starting to like you ;)"
-        uh "I lost this time.."
         hide unspeakable_horror
         with moveouttop
         $ lover = 'Unspeakable Horror'
@@ -124,9 +130,13 @@ label start:
 
         play music "audio/alcohaulin ass.mp3"
 
-        show sesshomaru at right with moveintop:
+        show david at right with moveintop:
             yalign .5 subpixel True
 
+            parallel:
+                rotate 0
+                linear 2 rotate 360
+                repeat
             # parallel:
             #     xalign .5
             #     linear 3.0 xalign .75
@@ -139,11 +149,6 @@ label start:
             #     linear .75 zoom .9
             #     linear .75 zoom 1.0
             #     repeat
-
-            parallel:
-                rotate 0
-                linear 2 rotate 360
-                repeat
 
         show charles at left with moveinleft:
             yalign .5 subpixel True
@@ -166,17 +171,108 @@ label start:
                 linear 0.25 rotate 360
                 repeat
 
-        "you ready to play?"
+        da "You ready to play Pichael?"
+
+        ch "One minute I need to finish breakdancing"
+
+        "Pichael does airflares while Eric and the band play"
+
+        "He flies off the stage and into the crowd"
+
+        play music "audio/sleepytime gorilla museum.mp3"
+
+        "The audience is shocked when he turns into a vegetable"
+
+        "Several innocent bystanders also transform into various foods"
+
+        da "Eric, even though you are a vegetable, you're still pretty cute ;)"
+
+        da "I'll do whatever it takes to turn you back"
+
+        ch "..."
+
+        menu:
+
+            "Choose a spell"
+
+            "Try setting up a cooking show":
+                play sound "audio/cute music.mp3"
+                ch "whoa what did you just do???"
+
+                ch "I feel like time just skipped"
+
+                da "*crying*"
+
+                ch "Why are you crying nothing happened?"
+
+                jump good_path
+
+
+            "Bring him to the nearest volcano":
+                play sound "audio/water splash.mp3"
+                play music "audio/khrushchev trap.mp3"
+                ch "That felt good baby! But I'm still a vegetable"
+                show unspeakable_horror
+                with moveinleft
+                uh "Hey fancy meeting you here!"
+
+            "Eat the eggplant audience members":
+                play music "audio/brutaldubstep.mp3"
+                da "Cool now I'm an eggplant"
+                "They lived happily ever after..."
+
+    label good_path:
+
+        scene bg cafe
+
+        show drew with moveinright
+
+        show david with moveintop
+
+        show charles with moveinbottom
+
+        dr "You seriously thought I would just let you be together?"
+
+        ch "Yes.."
+
+        dr "You best be ready to dance, young man"
+
+        ch "Oh boy"
+
+        menu:
+
+            "Airflares":
+                "rick always wins"
+
+            "Windmills":
+                "rick always wins"
+
+            "Toprock":
+                "You turn back into a vegetable"
+
+
+
+#         Rick is Pichael's dad
+#  · Reply · Pin · 2m
+# Michael J Block
+# Rick says you can't be with Pichael unless you beat me at a breakdancing competition
+#  · Reply · Pin · 2m
+# Michael J Block
+# So Eric accepts the challenge
+#  · Reply · Pin · 2m
+# Michael J Block
+# Eric learned from his former accident, and tricks Rick into making the mistake he formerly made
+
+
 
     return
 
-    label boss_attack(boss_taunt=""):
+    label boss_attack(num_attacks=0):
 
-        if current_song != "dubstep":
-            play music "audio/brutaldubstep.mp3"
-            $ current_song = "dubstep"
-        else:
+        if num_attacks == 0:
             play music "audio/sleepytime gorilla museum.mp3"
+        elif num_attacks == 1:
+            play music "audio/prokofiev.mp3"
 
         show bg ominoustrees with Dissolve(1)
 
@@ -201,7 +297,7 @@ label start:
                 linear 5 rotate 360
                 repeat
 
-        uh "[boss_taunt]"
+        uh "ULTIMATE ATTACK"
 
         $ player_health -= 10
 
